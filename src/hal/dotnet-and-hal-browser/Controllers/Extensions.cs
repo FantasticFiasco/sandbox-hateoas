@@ -12,6 +12,11 @@ namespace Hateoas.Controllers
             return Mapper.Map<T>(self);
         }
 
+        public static HALResponse CreateHalResponse(this ControllerBase self, object model = null)
+        {
+            return new HALResponse(model, new HALModelConfig { ForceHAL = true });
+        }
+
         public static HALResponse AddLink(this HALResponse self, Link link)
         {
             return self.AddLinks(link);

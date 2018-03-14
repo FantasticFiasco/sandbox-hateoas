@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Halcyon.HAL;
 using Halcyon.Web.HAL;
 using Hateoas.Controllers.DataTransferObjects;
 using Hateoas.Models;
@@ -30,7 +29,7 @@ namespace Hateoas.Controllers
         {
             var article = articleService.Add(body.MapTo<ArticleToAddOrUpdate>());
 
-            return new HALResponse(article.MapTo<ArticleBody>())
+            return this.CreateHalResponse(article.MapTo<ArticleBody>())
                 .AddLink(LinkTemplates.Article.Self)
                 .AddLocationHeader(this, article.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
@@ -48,7 +47,7 @@ namespace Hateoas.Controllers
 
             var author = authorService.Get(article.AuthorId);
 
-            return new HALResponse(article.MapTo<ArticleBody>())
+            return this.CreateHalResponse(article.MapTo<ArticleBody>())
                 .AddLink(LinkTemplates.Article.Self)
                 .AddLink(LinkTemplates.Article.Edit)
                 .AddLink(LinkTemplates.Article.Delete)
@@ -62,7 +61,7 @@ namespace Hateoas.Controllers
         {
             var articles = articleService.GetByAuthor(authorId);
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddSelfLink(Request)
                 .AddEmbeddedCollection("articles", articles.MapTo<ArticleBody[]>(), LinkTemplates.Article.Self)
                 .ToActionResult(this);
@@ -73,7 +72,7 @@ namespace Hateoas.Controllers
         {
             var articles = articleService.GetAll();
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddSelfLink(Request)
                 .AddEmbeddedCollection("articles", articles.MapTo<ArticleBody[]>(), LinkTemplates.Article.Self)
                 .ToActionResult(this);
@@ -89,7 +88,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return new HALResponse(article.MapTo<ArticleBody>())
+            return this.CreateHalResponse(article.MapTo<ArticleBody>())
                 .AddLink(LinkTemplates.Article.Self)
                 .ToActionResult(this);
         }
@@ -113,7 +112,7 @@ namespace Hateoas.Controllers
                 commentService.Remove(comment.Id);
             }
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddLink(LinkTemplates.Article.GetAll)
                 .ToActionResult(this);
         }
