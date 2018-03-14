@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Halcyon.HAL;
 using Halcyon.Web.HAL;
 using Hateoas.Controllers.DataTransferObjects;
 using Hateoas.Models;
@@ -27,7 +26,7 @@ namespace Hateoas.Controllers
         {
             var author = authorService.Add(body.MapTo<AuthorToAddOrUpdate>());
 
-            return new HALResponse(author.MapTo<AuthorBody>())
+            return this.CreateHalResponse(author.MapTo<AuthorBody>())
                 .AddLink(LinkTemplates.Author.Self)
                 .AddLocationHeader(this, author.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
@@ -43,7 +42,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return new HALResponse(author.MapTo<AuthorBody>())
+            return this.CreateHalResponse(author.MapTo<AuthorBody>())
                 .AddLink(LinkTemplates.Author.Self)
                 .AddLink(LinkTemplates.Author.Edit)
                 .AddLink(LinkTemplates.Author.Delete)
@@ -56,7 +55,7 @@ namespace Hateoas.Controllers
         {
             var authors = authorService.GetAll();
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddSelfLink(Request)
                 .AddEmbeddedCollection("authors", authors.MapTo<AuthorBody[]>(), LinkTemplates.Author.Self)
                 .ToActionResult(this);
@@ -72,7 +71,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return new HALResponse(author.MapTo<AuthorBody>())
+            return this.CreateHalResponse(author.MapTo<AuthorBody>())
                 .AddLink(LinkTemplates.Author.Self)
                 .ToActionResult(this);
         }
@@ -96,7 +95,7 @@ namespace Hateoas.Controllers
                 articleService.Remove(article.Id);
             }
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddLink(LinkTemplates.Author.GetAll)
                 .ToActionResult(this);
         }

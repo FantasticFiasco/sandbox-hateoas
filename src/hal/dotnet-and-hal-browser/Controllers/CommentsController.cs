@@ -1,5 +1,4 @@
 ﻿using System.Net;
-using Halcyon.HAL;
 using Halcyon.Web.HAL;
 using Hateoas.Controllers.DataTransferObjects;
 using Hateoas.Models;
@@ -30,7 +29,7 @@ namespace Hateoas.Controllers
         {
             var comment = commentService.Add(body.MapTo<CommentToAdd>());
 
-            return new HALResponse(comment.MapTo<CommentBody>())
+            return this.CreateHalResponse(comment.MapTo<CommentBody>())
                 .AddLink(LinkTemplates.Comment.Self)
                 .AddLocationHeader(this, comment.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
@@ -54,7 +53,7 @@ namespace Hateoas.Controllers
             var author = authorService.Get(comment.AuthorId);
             var article = articleService.Get(articleId);
 
-            return new HALResponse(comment.MapTo<CommentBody>())
+            return this.CreateHalResponse(comment.MapTo<CommentBody>())
                 .AddLink(LinkTemplates.Comment.Self)
                 .AddLink(LinkTemplates.Comment.Delete)
                 .AddEmbeddedResource("author", author.MapTo<AuthorBody>(), LinkTemplates.Author.Self)
@@ -67,7 +66,7 @@ namespace Hateoas.Controllers
         {
             var comments = commentService.GetAll(articleId);
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddSelfLink(Request)
                 .AddEmbeddedCollection("comments", comments.MapTo<CommentBody[]>(), LinkTemplates.Comment.Self)
                 .ToActionResult(this);
@@ -83,7 +82,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return new HALResponse(null)
+            return this.CreateHalResponse()
                 .AddLink(LinkTemplates.Comment.GetAllForArticle)
                 .ToActionResult(this);
         }
