@@ -45,6 +45,7 @@ namespace Hateoas
                 app.UseDeveloperExceptionPage();
             }
 
+            app.UseDefaultFiles();
             app.UseStaticFiles();
 
             app.UseMvc();
