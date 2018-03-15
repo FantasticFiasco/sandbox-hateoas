@@ -31,6 +31,7 @@ namespace Hateoas.Controllers
 
             return this.CreateHalResponse(comment.MapTo<CommentBody>())
                 .AddLink(LinkTemplates.Comment.Self)
+                .AddLink(LinkTemplates.Comment.Create)
                 .AddLocationHeader(this, comment.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
         }

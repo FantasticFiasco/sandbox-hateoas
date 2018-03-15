@@ -74,6 +74,7 @@ namespace Hateoas.Controllers
 
             return this.CreateHalResponse()
                 .AddSelfLink(Request)
+                .AddLink(LinkTemplates.Article.Create)
                 .AddEmbeddedCollection("articles", articles.MapTo<ArticleBody[]>(), LinkTemplates.Article.Self)
                 .ToActionResult(this);
         }

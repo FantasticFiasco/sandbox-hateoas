@@ -8,6 +8,8 @@ namespace Hateoas.Controllers
         {
             public static Link Self { get; } = new Link("self", "/api/authors/{Id}", method: "GET");
 
+            public static Link Create { get; } = new Link("create", "/api/authors", method: "POST");
+
             public static Link GetAll { get; } = new Link("authors", "/api/authors", method: "GET");
 
             public static Link Edit { get; } = new Link("edit", "/api/authors/{Id}", method: "PUT");
@@ -21,6 +23,8 @@ namespace Hateoas.Controllers
         {
             public static Link Self { get; } = new Link("self", "/api/articles/{Id}", method: "GET");
 
+            public static Link Create { get; } = new Link("create", "/api/articles", method: "POST");
+
             public static Link GetAll { get; } = new Link("articles", "/api/articles", method: "GET");
 
             public static Link Comments { get; } = new Link("comments", "/api/articles/{Id}/comments", method: "GET");
@@ -33,6 +37,8 @@ namespace Hateoas.Controllers
         public static class Comment
         {
             public static Link Self { get; } = new Link("self", "/api/articles/{ArticleId}/comments/{Id}", method: "GET");
+
+            public static Link Create { get; } = new Link("create", "/api/articles/{ArticleId}/comments", method: "POST");
 
             public static Link GetAllForArticle { get; } = new Link("comments", "/api/article/{ArticleId}/comments/{Id}", method: "GET");
 

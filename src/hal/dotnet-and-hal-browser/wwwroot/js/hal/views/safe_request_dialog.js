@@ -1,4 +1,4 @@
-var CustomPostForm = Backbone.View.extend({
+HAL.customPostForm = Backbone.View.extend({
 	initialize: function (opts) {
 		this.href = opts.href.split('{')[0];
 		this.vent = opts.vent;
@@ -70,5 +70,3 @@ var CustomPostForm = Backbone.View.extend({
 	},
 	template: _.template($('#dynamic-request-template').html())
 });
-
-HAL.customPostForm = CustomPostForm;

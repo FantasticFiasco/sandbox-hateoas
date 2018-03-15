@@ -194,6 +194,35 @@ Content-Type: application/json
     </form>
   </script>
 
+  <script id="dynamic-request-template" type="text/template">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+      <h3>Make a non-GET request</h3>
+    </div>
+    
+    <form class="non-safe" action="<%= href %>">
+      <div class="modal-body">
+        <p>Target URI</p>
+        <input name="url" type="text" class="url" value="<%= href %>" />
+        <p>Method:</p>
+        <input name="method" type="text" class="method" value="POST" />
+        <p>Headers:</p>
+        <textarea name="headers" class="headers" style="height: 100px">
+        Content-Type: application/json
+        <%= user_defined_headers %>
+        </textarea>
+      </div>
+      <% _.each(schema.properties, function(value, name) { %>
+        <% if (!("format" in value)) { %>
+          <input type="text" placeholder="<%= name %>" name="<%= name %>" />
+        <% } %>
+      <% }); %>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Make Request</button>
+      </div>
+    </form>
+  </script>
+
   <script id="embedded-resources-template" type="text/template">
     <h2>Embedded Resources</h2>
   </script>
@@ -238,6 +267,7 @@ Content-Type: application/json
   <script src="js/hal/views/embedded_resource.js"></script>
 
   <script src="js/hal/views/non_safe_request_dialog.js"></script>
+  <script src="js/hal/views/safe_request_dialog.js"></script>
   <script src="js/hal/views/query_uri_dialog.js"></script>
 
   <script src="js/hal/views/response.js"></script>
