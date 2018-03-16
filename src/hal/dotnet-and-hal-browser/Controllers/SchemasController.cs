@@ -1,52 +1,43 @@
 ﻿using System;
-using System.Collections.Concurrent;
+using System.Collections.Generic;
 using Hateoas.Controllers.DataTransferObjects;
+using Hateoas.Services;
 using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
 
 namespace Hateoas.Controllers
 {
     [Route("api")]
     public class SchemasController : ControllerBase
     {
-        private static readonly ConcurrentDictionary<string, JSchema> SchemaByEntityName;
+        private static readonly IDictionary<string, Type> TypeByEntityName;
 
-        private readonly JSchemaGenerator schemaGenerator;
+        private readonly SchemaService schemaService;
 
         static SchemasController()
         {
-            SchemaByEntityName = new ConcurrentDictionary<string, JSchema>();
+            TypeByEntityName = new Dictionary<string, Type>
+            {
+                ["authors"] = typeof(AuthorRequestBody),
+                ["articles"] = typeof(ArticleRequestBody),
+                ["comments"] = typeof(CommentRequestBody)
+            };
         }
 
-        public SchemasController()
+        public SchemasController(SchemaService schemaService)
         {
-            schemaGenerator = new JSchemaGenerator();
+            this.schemaService = schemaService;
         }
-        
+
         [HttpGet]
         [Route("{entityName:regex(\\w+)}/schema")]
-        public JSchema Get(string entityName)
+        public IActionResult Get(string entityName)
         {
-            return SchemaByEntityName.GetOrAdd(entityName, GenerateSchema);
-        }
-
-        private JSchema GenerateSchema(string entityName)
-        {
-            switch (entityName)
+            if (!TypeByEntityName.TryGetValue(entityName, out var entityType))
             {
-                case "authors":
-                    return schemaGenerator.Generate(typeof(AuthorRequestBody));
-
-                case "articles":
-                    return schemaGenerator.Generate(typeof(ArticleRequestBody));
-
-                case "comments":
-                    return schemaGenerator.Generate(typeof(CommentRequestBody));
-
-                default:
-                    throw new NotSupportedException($"Schema for entity with name '{entityName}' is not supported");
+                return BadRequest();
             }
+
+            return Ok(schemaService.GetJsonSchema(entityType));
         }
     }
 }
