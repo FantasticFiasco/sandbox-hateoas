@@ -207,16 +207,16 @@ Content-Type: application/json
         <p>Method:</p>
         <input name="method" type="text" class="method" value="POST" />
         <p>Headers:</p>
-        <textarea name="headers" class="headers" style="height: 100px">
-        Content-Type: application/json
-        <%= user_defined_headers %>
-        </textarea>
+<textarea name="headers" class="headers" style="height: 80px">
+Content-Type: application/json
+<%= user_defined_headers %>
+</textarea>
+        <% _.each(schema.properties, function(value, name) { %>
+          <% if (!("format" in value)) { %>
+            <input type="text" placeholder="<%= name %>" name="<%= name %>" />
+          <% } %>
+        <% }); %>
       </div>
-      <% _.each(schema.properties, function(value, name) { %>
-        <% if (!("format" in value)) { %>
-          <input type="text" placeholder="<%= name %>" name="<%= name %>" />
-        <% } %>
-      <% }); %>
       <div class="modal-footer">
         <button type="submit" class="btn btn-primary">Make Request</button>
       </div>
