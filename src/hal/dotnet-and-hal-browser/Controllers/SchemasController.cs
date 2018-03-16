@@ -36,13 +36,13 @@ namespace Hateoas.Controllers
             switch (entityName)
             {
                 case "authors":
-                    return schemaGenerator.Generate(typeof(AuthorBody));
+                    return schemaGenerator.Generate(typeof(AuthorRequestBody));
 
                 case "articles":
-                    return schemaGenerator.Generate(typeof(ArticleBody));
+                    return schemaGenerator.Generate(typeof(ArticleRequestBody));
 
                 case "comments":
-                    return schemaGenerator.Generate(typeof(CommentBody));
+                    return schemaGenerator.Generate(typeof(CommentRequestBody));
 
                 default:
                     throw new NotSupportedException($"Schema for entity with name '{entityName}' is not supported");

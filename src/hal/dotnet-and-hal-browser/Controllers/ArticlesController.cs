@@ -25,11 +25,11 @@ namespace Hateoas.Controllers
         }
 
         [HttpPost("articles")]
-        public IActionResult Post([FromBody] ArticleBody body)
+        public IActionResult Post([FromBody] ArticleRequestBody body)
         {
             var article = articleService.Add(body.MapTo<ArticleToAddOrUpdate>());
 
-            return this.CreateHalResponse(article.MapTo<ArticleBody>())
+            return this.CreateHalResponse(article.MapTo<ArticleResponseBody>())
                 .AddLink(LinkTemplates.Article.Self)
                 .AddLocationHeader(this, article.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
@@ -47,12 +47,12 @@ namespace Hateoas.Controllers
 
             var author = authorService.Get(article.AuthorId);
 
-            return this.CreateHalResponse(article.MapTo<ArticleBody>())
+            return this.CreateHalResponse(article.MapTo<ArticleResponseBody>())
                 .AddLink(LinkTemplates.Article.Self)
                 .AddLink(LinkTemplates.Article.Edit)
                 .AddLink(LinkTemplates.Article.Delete)
                 .AddLink(LinkTemplates.Article.Comments)
-                .AddEmbeddedResource("author", author.MapTo<AuthorBody>(), LinkTemplates.Author.Self)
+                .AddEmbeddedResource("author", author.MapTo<AuthorResponseBody>(), LinkTemplates.Author.Self)
                 .ToActionResult(this);
         }
 
@@ -63,7 +63,7 @@ namespace Hateoas.Controllers
 
             return this.CreateHalResponse()
                 .AddSelfLink(Request)
-                .AddEmbeddedCollection("articles", articles.MapTo<ArticleBody[]>(), LinkTemplates.Article.Self)
+                .AddEmbeddedCollection("articles", articles.MapTo<ArticleResponseBody[]>(), LinkTemplates.Article.Self)
                 .ToActionResult(this);
         }
 
@@ -75,12 +75,12 @@ namespace Hateoas.Controllers
             return this.CreateHalResponse()
                 .AddSelfLink(Request)
                 .AddLink(LinkTemplates.Article.Create)
-                .AddEmbeddedCollection("articles", articles.MapTo<ArticleBody[]>(), LinkTemplates.Article.Self)
+                .AddEmbeddedCollection("articles", articles.MapTo<ArticleResponseBody[]>(), LinkTemplates.Article.Self)
                 .ToActionResult(this);
         }
 
         [HttpPut("articles/{id:int}")]
-        public IActionResult Put(int id, [FromBody] ArticleBody body)
+        public IActionResult Put(int id, [FromBody] ArticleRequestBody body)
         {
             var article = articleService.Update(id, body.MapTo<ArticleToAddOrUpdate>());
 
@@ -89,7 +89,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return this.CreateHalResponse(article.MapTo<ArticleBody>())
+            return this.CreateHalResponse(article.MapTo<ArticleResponseBody>())
                 .AddLink(LinkTemplates.Article.Self)
                 .ToActionResult(this);
         }
