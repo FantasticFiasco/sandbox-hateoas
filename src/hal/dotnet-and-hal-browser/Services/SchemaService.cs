@@ -1,24 +1,15 @@
 ﻿using System;
-using System.Collections.Concurrent;
-using Newtonsoft.Json.Schema;
-using Newtonsoft.Json.Schema.Generation;
+using System.Threading.Tasks;
+using NJsonSchema;
 
 namespace Hateoas.Services
 {
     public class SchemaService
     {
-        private readonly ConcurrentDictionary<Type, JSchema> schemaByType;
-        private readonly JSchemaGenerator schemaGenerator;
-
-        public SchemaService()
+        public async Task<string> GetJsonSchemaAsync(Type entityType)
         {
-            schemaByType = new ConcurrentDictionary<Type, JSchema>();
-            schemaGenerator = new JSchemaGenerator();
-        }
-
-        public JSchema GetJsonSchema(Type entityType)
-        {
-            return schemaByType.GetOrAdd(entityType, schemaGenerator.Generate(entityType));
+            var schema = await JsonSchema4.FromTypeAsync(entityType);
+            return schema.ToJson();
         }
     }
 }
