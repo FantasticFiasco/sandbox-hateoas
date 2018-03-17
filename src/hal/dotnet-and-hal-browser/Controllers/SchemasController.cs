@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hateoas.Controllers.DataTransferObjects;
-using Hateoas.Services;
 using Microsoft.AspNetCore.Mvc;
+using NJsonSchema;
 
 namespace Hateoas.Controllers
 {
@@ -11,8 +11,6 @@ namespace Hateoas.Controllers
     public class SchemasController : ControllerBase
     {
         private static readonly IDictionary<string, Type> TypeByEntityName;
-
-        private readonly SchemaService schemaService;
 
         static SchemasController()
         {
@@ -24,11 +22,6 @@ namespace Hateoas.Controllers
             };
         }
 
-        public SchemasController(SchemaService schemaService)
-        {
-            this.schemaService = schemaService;
-        }
-
         [HttpGet]
         [Route("{entityName:regex(\\w+)}/schema")]
         public async Task<IActionResult> GetSchemaForPostRequest(string entityName)
@@ -38,7 +31,7 @@ namespace Hateoas.Controllers
                 return BadRequest();
             }
 
-            var schema = await schemaService.GetJsonSchemaAsync(entityType);
+            var schema = await JsonSchema4.FromTypeAsync(entityType);
             return Ok(schema);
         }
 
@@ -51,7 +44,7 @@ namespace Hateoas.Controllers
                 return BadRequest();
             }
 
-            var schema = await schemaService.GetJsonSchemaAsync(entityType);
+            var schema = await JsonSchema4.FromTypeAsync(entityType);
             return Ok(schema);
         }
     }

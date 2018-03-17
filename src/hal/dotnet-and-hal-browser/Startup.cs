@@ -27,7 +27,6 @@ namespace Hateoas
             services.AddSingleton<AuthorService>();
             services.AddSingleton<ArticleService>();
             services.AddSingleton<CommentService>();
-            services.AddSingleton<SchemaService>();
 
             services.AddMvc(options =>
             {
