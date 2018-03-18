@@ -14,6 +14,4 @@ The following graph describe the relations between authors, articles and comment
 
 These are the implementations that currently exist in this repository:
 
-### Implementations using [HAL](http://stateless.co/hal_specification.html)
-
 - [.NET Core backend with the HAL-browser as client](./src/hal/dotnet-and-hal-browser)
