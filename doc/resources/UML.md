@@ -2,9 +2,18 @@
 <summary></summary>
 custom_relations_uml
 @startuml;
-object Author
-object Article
-object Comment
+object Author {
+    name
+    email
+}
+
+object Article {
+
+}
+
+object Comment {
+
+}
 
 Author --|> Article : many
 Article --|> Author : one
