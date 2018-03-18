@@ -3,16 +3,20 @@
 custom_relations_uml
 @startuml;
 object Author {
-    name
-    email
+    name = "string"
+    email = "string"
 }
 
 object Article {
-
+    authorId = "int"
+    title = "string"
+    body = "string"
 }
 
 object Comment {
-
+    authorId = "int"
+    articleId = "int"
+    message = "string"
 }
 
 Author --|> Article : many
