@@ -7,6 +7,10 @@ using NJsonSchema;
 
 namespace Hateoas.Controllers
 {
+    /// <summary>
+    /// Controller supporting the web client by providing JSON Schemas for types that can be
+    /// created or updated by the client.
+    /// </summary>
     [Route("api")]
     public class SchemasController : ControllerBase
     {
