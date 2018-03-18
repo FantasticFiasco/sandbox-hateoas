@@ -27,7 +27,7 @@ namespace Hateoas.Controllers
         }
 
         [HttpGet]
-        [Route("{entityName:regex(\\w+)}/schema")]
+        [Route("{entityName}/schema")]
         public async Task<IActionResult> GetSchemaForPostRequest(string entityName)
         {
             if (!TypeByEntityName.TryGetValue(entityName, out var entityType))
@@ -40,7 +40,7 @@ namespace Hateoas.Controllers
         }
 
         [HttpGet]
-        [Route("{entityName:regex(\\w+)}/{id:regex(\\d+)}/schema")]
+        [Route("{entityName}/{id:int}/schema")]
         public async Task<IActionResult> GetSchemaForPutRequest(string entityName, int id)
         {
             if (!TypeByEntityName.TryGetValue(entityName, out var entityType))
