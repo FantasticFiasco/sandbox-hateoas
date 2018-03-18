@@ -16,6 +16,6 @@ The following graph describe the relations between authors, articles and comment
 
 ## Implementations
 
-The following implementations currently exist in this repository:
+The following implementations currently exist in this repository.
 
 - [.NET Core backend with the HAL-browser as client](./src/hal/dotnet-and-hal-browser)
