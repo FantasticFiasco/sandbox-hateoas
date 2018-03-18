@@ -6,14 +6,14 @@ namespace Hateoas.Controllers.DataTransferObjects
     {
         // <remarks>
         // Id should not be returned to client, but is needed internally for the HAL link
-        // templates
+        // templates.
         // </remarks>
         [JsonIgnore]
         public int Id { get; set; }
 
         // <remarks>
         // Id should not be returned to client, but is needed internally for the HAL link
-        // templates
+        // templates.
         // </remarks>
         [JsonIgnore]
         public override int? AuthorId { get; set; }
