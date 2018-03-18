@@ -22,11 +22,11 @@ namespace Hateoas.Controllers
         }
 
         [HttpPost("authors")]
-        public IActionResult Post([FromBody] AuthorBody body)
+        public IActionResult Post([FromBody] AuthorRequestBody body)
         {
             var author = authorService.Add(body.MapTo<AuthorToAddOrUpdate>());
 
-            return this.CreateHalResponse(author.MapTo<AuthorBody>())
+            return this.CreateHalResponse(author.MapTo<AuthorResponseBody>())
                 .AddLink(LinkTemplates.Author.Self)
                 .AddLocationHeader(this, author.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
@@ -42,7 +42,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return this.CreateHalResponse(author.MapTo<AuthorBody>())
+            return this.CreateHalResponse(author.MapTo<AuthorResponseBody>())
                 .AddLink(LinkTemplates.Author.Self)
                 .AddLink(LinkTemplates.Author.Edit)
                 .AddLink(LinkTemplates.Author.Delete)
@@ -57,12 +57,13 @@ namespace Hateoas.Controllers
 
             return this.CreateHalResponse()
                 .AddSelfLink(Request)
-                .AddEmbeddedCollection("authors", authors.MapTo<AuthorBody[]>(), LinkTemplates.Author.Self)
+                .AddLink(LinkTemplates.Author.Create)
+                .AddEmbeddedCollection("authors", authors.MapTo<AuthorResponseBody[]>(), LinkTemplates.Author.Self)
                 .ToActionResult(this);
         }
 
         [HttpPut("authors/{id:int}")]
-        public IActionResult Put(int id, [FromBody] AuthorBody body)
+        public IActionResult Put(int id, [FromBody] AuthorRequestBody body)
         {
             var author = authorService.Update(id, body.MapTo<AuthorToAddOrUpdate>());
 
@@ -71,7 +72,7 @@ namespace Hateoas.Controllers
                 return NotFound();
             }
 
-            return this.CreateHalResponse(author.MapTo<AuthorBody>())
+            return this.CreateHalResponse(author.MapTo<AuthorResponseBody>())
                 .AddLink(LinkTemplates.Author.Self)
                 .ToActionResult(this);
         }

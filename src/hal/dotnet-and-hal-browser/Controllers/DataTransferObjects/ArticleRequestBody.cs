@@ -1,15 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json;
 
 namespace Hateoas.Controllers.DataTransferObjects
 {
-    public class ArticleBody
+    public class ArticleRequestBody
     {
-        [JsonIgnore]
-        public int Id { get; set; }
-
-        [JsonIgnore]
-        public int? AuthorId { get; set; }
+        [Required]
+        public virtual int? AuthorId { get; set; }
 
         [Required]
         public string Title { get; set; }

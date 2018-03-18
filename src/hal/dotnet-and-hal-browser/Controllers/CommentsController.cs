@@ -25,12 +25,13 @@ namespace Hateoas.Controllers
         }
 
         [HttpPost("articles/{articleId:int}/comments")]
-        public IActionResult Post([FromBody] CommentBody body)
+        public IActionResult Post([FromBody] CommentRequestBody body)
         {
             var comment = commentService.Add(body.MapTo<CommentToAdd>());
 
-            return this.CreateHalResponse(comment.MapTo<CommentBody>())
+            return this.CreateHalResponse(comment.MapTo<CommentResponseBody>())
                 .AddLink(LinkTemplates.Comment.Self)
+                .AddLink(LinkTemplates.Comment.Create)
                 .AddLocationHeader(this, comment.Id)
                 .ToActionResult(this, HttpStatusCode.Created);
         }
@@ -53,11 +54,11 @@ namespace Hateoas.Controllers
             var author = authorService.Get(comment.AuthorId);
             var article = articleService.Get(articleId);
 
-            return this.CreateHalResponse(comment.MapTo<CommentBody>())
+            return this.CreateHalResponse(comment.MapTo<CommentResponseBody>())
                 .AddLink(LinkTemplates.Comment.Self)
                 .AddLink(LinkTemplates.Comment.Delete)
-                .AddEmbeddedResource("author", author.MapTo<AuthorBody>(), LinkTemplates.Author.Self)
-                .AddEmbeddedResource("article", article.MapTo<ArticleBody>(), LinkTemplates.Article.Self)
+                .AddEmbeddedResource("author", author.MapTo<AuthorResponseBody>(), LinkTemplates.Author.Self)
+                .AddEmbeddedResource("article", article.MapTo<ArticleResponseBody>(), LinkTemplates.Article.Self)
                 .ToActionResult(this);
         }
 
@@ -68,7 +69,7 @@ namespace Hateoas.Controllers
 
             return this.CreateHalResponse()
                 .AddSelfLink(Request)
-                .AddEmbeddedCollection("comments", comments.MapTo<CommentBody[]>(), LinkTemplates.Comment.Self)
+                .AddEmbeddedCollection("comments", comments.MapTo<CommentResponseBody[]>(), LinkTemplates.Comment.Self)
                 .ToActionResult(this);
         }
 
