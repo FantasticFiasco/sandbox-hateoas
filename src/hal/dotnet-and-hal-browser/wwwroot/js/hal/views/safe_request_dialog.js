@@ -1,6 +1,7 @@
 HAL.customPostForm = Backbone.View.extend({
 	initialize: function (opts) {
 		this.href = opts.href.split('{')[0];
+		this.method = opts.method;
 		this.vent = opts.vent;
 		_.bindAll(this, 'createNewResource');
 	},
@@ -60,7 +61,8 @@ HAL.customPostForm = Backbone.View.extend({
 		request.done(function (schema) {
 			self.schema = schema;
 			self.$el.html(self.template({
-			    href: self.href,
+				href: self.href,
+				method: self.method,
 			    schema: self.schema,
 			    user_defined_headers: headersString}));
 			self.$el.modal();
