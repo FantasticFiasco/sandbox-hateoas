@@ -8,7 +8,7 @@ object Author {
 }
 
 object Article {
-    authorId = "int"
+    authorId: number
     title = "string"
     body = "string"
 }
