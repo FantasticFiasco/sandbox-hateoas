@@ -1,8 +1,12 @@
 # HATEOAS sandbox
 
-This repository is a sandbox for different implementations of [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS). All implementations will model a common blog where authors can post articles, and other authors can comment on those articles.
+This repository is a sandbox for different implementations of [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS). Currently only one implementation exist but more will possibly be added in the future.
 
-The following graph is describing the entity relations.
+## Domain model
+
+Imagine there to be a site where you as an author can post articles. You can also read articles from other authors, and collaborate by posting comments to those articles.
+
+The following graph describe the relations between authors, articles and comments.
 
 ![Entity relations UML](https://g.gravizo.com/source/custom_relations_uml?https%3A%2F%2Fraw.githubusercontent.com%2FFantasticFiasco%2Fsandbox-hateoas%2Fdocs%2Freadme%2Fdoc%2Fresources%2FUML.md)
 
