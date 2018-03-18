@@ -51,8 +51,7 @@
         <tr>
           <th>rel</th>
           <th>title</th>
-          <th>name / index</th>
-          <th>docs</th>
+          <th>method</th>
           <th>GET</th>
           <th>NON-GET</th>
         </tr>
@@ -64,12 +63,7 @@
             <tr>
               <td><strong><%= HAL.truncateIfUrl(rel) %></strong></td>
               <td><%= link.title || '' %></td>
-              <td><%= link.name ? 'name: ' + link.name : 'index: ' + i %></a></td>
-              <td>
-              <% if (HAL.isUrl(rel)) { %>
-                <a class="dox" href="<%= HAL.normalizeUrl(HAL.buildUrl(rel)) %>"><i class="icon-book"></i></a>
-              <% } %>
-              </td>
+              <td><%= link.method %></td>
               <td>
                 <% if (link.templated === true) { %>
                   <a class="query btn btn-success" href="<%= HAL.normalizeUrl(link.href) %>" title="Query URI template"><i class="icon-question-sign"></i></a>
@@ -78,7 +72,7 @@
                 <% } %>
               </td>
               <td>
-                <a class="non-get btn btn-warning" href="<%= HAL.normalizeUrl(link.href) %>" title="Perform non-GET request">!</a>
+                <a class="non-get btn btn-warning" href="<%= HAL.normalizeUrl(link.href) %>" title="Perform non-GET request" method="<%= link.method %>">!</a>
               </td>
             </tr>
           <% }); %>
@@ -86,12 +80,7 @@
           <tr>
             <td><strong><%= HAL.truncateIfUrl(rel) %></strong></td>
             <td><%= obj.title || '' %></td>
-            <td><%= obj.name || '' %></td>
-            <td>
-            <% if (HAL.isUrl(rel)) { %>
-              <a class="dox" href="<%= HAL.normalizeUrl(HAL.buildUrl(rel)) %>"><i class="icon-book"></i></a>
-            <% } %>
-            </td>
+            <td><%= obj.method %></td>
             <td>
               <% if (obj.templated === true) { %>
                 <a class="query btn btn-success" href="<%= HAL.normalizeUrl(obj.href) %>" title="Query URI template"><i class="icon-question-sign"></i></a>
@@ -100,7 +89,7 @@
               <% } %>
             </td>
             <td>
-              <a class="non-get btn btn-warning" href="<%= HAL.normalizeUrl(obj.href) %>" title="Perform non-GET request">!</a>
+              <a class="non-get btn btn-warning" href="<%= HAL.normalizeUrl(obj.href) %>" title="Perform non-GET request" method="<%= obj.method %>">!</a>
             </td>
           </tr>
         <% } %>
@@ -205,7 +194,7 @@ Content-Type: application/json
         <p>Target URI</p>
         <input name="url" type="text" class="url" value="<%= href %>" />
         <p>Method:</p>
-        <input name="method" type="text" class="method" value="POST" />
+        <input name="method" type="text" class="method" value="<%= method %>" />
         <p>Headers:</p>
 <textarea name="headers" class="headers" style="height: 80px">
 Content-Type: application/json
