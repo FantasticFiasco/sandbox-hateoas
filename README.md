@@ -1,8 +1,10 @@
 # HATEOAS sandbox
 
-This repository is a sandbox for different implementations of [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS).
+This repository is a sandbox for different implementations of [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS). All implementations will model a common blog where authors can post articles, and other authors can comment on those articles.
 
-![Health benchmark UML](https://g.gravizo.com/source/custom_relations_uml?https%3A%2F%2Fraw.githubusercontent.com%2FFantasticFiasco%2Fsandbox-hateoas%2Fdocs%2Freadme%2Fdoc%2Fresources%2FUML.md)
+The following graph is describing the entity relations.
+
+![Entity relations UML](https://g.gravizo.com/source/custom_relations_uml?https%3A%2F%2Fraw.githubusercontent.com%2FFantasticFiasco%2Fsandbox-hateoas%2Fdocs%2Freadme%2Fdoc%2Fresources%2FUML.md)
 
 ## Implementations
 
