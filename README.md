@@ -12,10 +12,10 @@ Imagine there to be a site where you as an author can post articles. You can als
 
 The following graph describe the relations between authors, articles and comments.
 
-![Entity relations UML](https://g.gravizo.com/source/custom_relations_uml?https%3A%2F%2Fraw.githubusercontent.com%2FFantasticFiasco%2Fsandbox-hateoas%2Fdocs%2Freadme%2Fdoc%2FUML.md)
+![Entity relations UML](https://g.gravizo.com/source/custom_relations_uml?https%3A%2F%2Fraw.githubusercontent.com%2FFantasticFiasco%2Fsandbox-hateoas%2Fdoc%2FUML.md)
 
 ## Implementations
 
 The following implementations currently exist in this repository.
 
-- [.NET Core backend with the HAL-browser as client](./src/hal/dotnet-and-hal-browser)
+- [.NET Core backend with the HAL-browser as client](src/hal/dotnet-and-hal-browser)
