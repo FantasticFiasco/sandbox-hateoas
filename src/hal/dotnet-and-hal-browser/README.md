@@ -2,15 +2,13 @@
 
 ## Running the code
 
-Run the following commands in a Bash or PowerShell prompt.
+Run the following commands in Bash or PowerShell.
 
 ```bash
-docker build -t hal .
-docker run -p 5000:80 hal
+docker build -t hal-dotnet .
+docker run -p 8080:80 hal-dotnet
 ```
 
-When the Docker container is running hit [http://localhost:5000/#/api](http://localhost:5000/#/api) with your favorite web browser.
-
-You will be presented with the following view.
+When the container is running hit [http://localhost:8080/#/api](http://localhost:8080/#/api) with your favorite web browser and you'll be presented with the following view.
 
 ![HAL-browser](hal-browser.png)
