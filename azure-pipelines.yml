@@ -5,6 +5,6 @@ steps:
 - task: DotNetCoreCLI@2
   inputs:
     command: build
-    projects: ./technologies/dotnet-core
+    projects: ./src/hal/dotnet-and-hal-browser/Server.csproj
     arguments: --configuration Release
   displayName: Build
