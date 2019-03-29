@@ -10,7 +10,7 @@
     <PackageReference Include="Bogus" Version="26.0.2" />
     <PackageReference Include="Halcyon.Mvc" Version="2.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" />
-    <PackageReference Include="NJsonSchema" Version="9.13.27" />
+    <PackageReference Include="NJsonSchema" Version="9.13.28" />
   </ItemGroup>
 
   <ItemGroup>
