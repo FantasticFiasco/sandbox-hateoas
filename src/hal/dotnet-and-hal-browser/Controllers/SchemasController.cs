@@ -35,7 +35,7 @@ namespace Hateoas.Controllers
                 return BadRequest();
             }
 
-            var schema = await JsonSchema4.FromTypeAsync(entityType);
+            var schema = await JsonSchema.FromTypeAsync(entityType);
             return Ok(schema);
         }
 
@@ -48,7 +48,7 @@ namespace Hateoas.Controllers
                 return BadRequest();
             }
 
-            var schema = await JsonSchema4.FromTypeAsync(entityType);
+            var schema = await JsonSchema.FromTypeAsync(entityType);
             return Ok(schema);
         }
     }
