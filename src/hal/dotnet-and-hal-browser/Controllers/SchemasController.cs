@@ -28,27 +28,27 @@ namespace Hateoas.Controllers
 
         [HttpGet]
         [Route("{entityName}/schema")]
-        public async Task<IActionResult> GetSchemaForPostRequest(string entityName)
+        public IActionResult GetSchemaForPostRequest(string entityName)
         {
             if (!TypeByEntityName.TryGetValue(entityName, out var entityType))
             {
                 return BadRequest();
             }
 
-            var schema = await JsonSchema.FromTypeAsync(entityType);
+            var schema = JsonSchema.FromType(entityType);
             return Ok(schema);
         }
 
         [HttpGet]
         [Route("{entityName}/{id:int}/schema")]
-        public async Task<IActionResult> GetSchemaForPutRequest(string entityName, int id)
+        public IActionResult GetSchemaForPutRequest(string entityName, int id)
         {
             if (!TypeByEntityName.TryGetValue(entityName, out var entityType))
             {
                 return BadRequest();
             }
 
-            var schema = await JsonSchema.FromTypeAsync(entityType);
+            var schema = JsonSchema.FromType(entityType);
             return Ok(schema);
         }
     }
