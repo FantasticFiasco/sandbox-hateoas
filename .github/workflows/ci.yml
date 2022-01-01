@@ -2,7 +2,11 @@ name: CI
 
 on: [push, pull_request]
 
+<<<<<<< HEAD
 jobs:
+=======
+obs:
+>>>>>>> 9d87009 (chore: migrate ci from azure pipelines to github actions)
   build:
     runs-on: ubuntu-latest
     steps:
