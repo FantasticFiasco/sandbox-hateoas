@@ -8,6 +8,6 @@ jobs:
     steps:
       - name: Logo
         run: echo -e "$(curl --silent https://raw.githubusercontent.com/FantasticFiasco/logo/master/logo.ansi)"
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Build
         run: dotnet build --configuration Release ./src/hal/dotnet-and-hal-browser/Server.csproj
